@@ -19,7 +19,7 @@
       name: "{{subnet_name}}"
       address_prefix: "10.0.1.0/24"
       virtual_network: "{{vnet}}"
-  - name: Create the network security group that allows SSH...
+  - name: Create the network security group that allows SSH and web http/80...
     azure_rm_securitygroup:
       resource_group: "{{group_name}}"
       name: "{{nsg_name}}"
@@ -30,9 +30,16 @@
           access: Allow
           priority: 1001
           direction: Inbound
+        - name: Web
+          protocol: Tcp
+          destination_port_range: 80
+          access: Allow
+          priority: 1002
+          direction: Inbound
   - include_tasks: vm_details.yml
     loop:
       - { name: 'one', tag: 'nginx' }
       - { name: 'two', tag: 'apache' }
+      - { name: 'three', tag: 'apache' }
     loop_control:
       loop_var: vm

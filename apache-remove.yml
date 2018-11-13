@@ -1,0 +1,8 @@
+- hosts: web
+  tasks:
+    - name: Remove Apache web server...
+      apt:
+        pkg: apache2
+        state: absent
+        update_cache: true
+      become: true
