@@ -1,0 +1,10 @@
+host1 ansible_host=<ip> ansible_user=azureops
+host2 ansible_host=<ip> ansible_user=azureops
+host3 ansible_host=<ip> ansible_user=azureops
+
+[web]
+host2
+host3
+
+[haproxy]
+host1
